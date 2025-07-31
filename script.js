@@ -6,11 +6,12 @@ const breakModeBtn = document.getElementById("break-mode");
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const beep = document.getElementById("beep");
+const sessionMessage = document.getElementById("session-message");
 
 let timer;
 let isRunning = false;
 let isWorkMode = true;
-let remainingTime = 1500; // 25 min in seconds
+let remainingTime = 1500;
 
 function updateDisplay() {
   const mins = Math.floor(remainingTime / 60);
@@ -30,6 +31,7 @@ function startTimer() {
       clearInterval(timer);
       isRunning = false;
       beep.play();
+      sessionMessage.textContent = "Session Complete!";
     }
   }, 1000);
 }
@@ -43,6 +45,7 @@ function resetTimer() {
   pauseTimer();
   remainingTime = isWorkMode ? 1500 : 300;
   updateDisplay();
+  sessionMessage.textContent = "";
 }
 
 function setMode(work) {
@@ -58,4 +61,4 @@ resetBtn.addEventListener("click", resetTimer);
 workModeBtn.addEventListener("click", () => setMode(true));
 breakModeBtn.addEventListener("click", () => setMode(false));
 
-updateDisplay(); // Initialize on load
+updateDisplay();
