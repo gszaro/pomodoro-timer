@@ -23,6 +23,10 @@ function updateDisplay() {
 function startTimer() {
   if (isRunning) return;
   isRunning = true;
+  startBtn.disabled = true;
+  workModeBtn.disabled = true;
+  breakModeBtn.disabled = true;
+
   timer = setInterval(() => {
     remainingTime--;
     updateDisplay();
@@ -32,6 +36,9 @@ function startTimer() {
       isRunning = false;
       beep.play();
       sessionMessage.textContent = "Session Complete!";
+      startBtn.disabled = false;
+      workModeBtn.disabled = false;
+      breakModeBtn.disabled = false;
     }
   }, 1000);
 }
@@ -39,6 +46,9 @@ function startTimer() {
 function pauseTimer() {
   clearInterval(timer);
   isRunning = false;
+  startBtn.disabled = false;
+  workModeBtn.disabled = false;
+  breakModeBtn.disabled = false;
 }
 
 function resetTimer() {
